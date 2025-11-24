@@ -28,7 +28,7 @@ CREATE TABLE `entregas` (
   CONSTRAINT `entregas_ibfk_1` FOREIGN KEY (`id_transportadora`) REFERENCES `transportadoras` (`id`)
 )
 
-transportadoras, CREATE TABLE `transportadoras` (
+CREATE TABLE `transportadoras` (
   `id` varchar(50) NOT NULL,
   `cnpj` bigint(20) NOT NULL,
   `fantasia` varchar(255) NOT NULL,
