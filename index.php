@@ -64,7 +64,8 @@ if(empty($rows)){
 
         <tbody id="lista-entregas">
             <?php foreach ($rows as $e) : ?>
-                <tr>
+                <tr class="linha-entrega" data-id="<?= $e['id'] ?>">
+
                     <td><?= $e['id'] ?></td>
                     <td><?= $e['fantasia'] ?></td>
                     <td><?= $e['remetente_nome'] ?></td>
@@ -85,9 +86,52 @@ if(empty($rows)){
     </table>
 
 </div>
+
+<div class="modal fade" id="modalDetalhes" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Detalhes da Entrega</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body" id="conteudoModal">
+         Carregando...
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Fechar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
 
 <script>
+
+    $(document).on("click", ".linha-entrega", function() {
+
+        let id = $(this).data("id");
+
+        $.ajax({
+            url: "controllers/EntregaController.php?action=detalhes",
+            type: "POST",
+            data: { id: id },
+            success: function(res){
+                $("#conteudoModal").html(res);
+                $("#modalDetalhes").modal("show");
+            }
+        });
+
+    });
+
     $(document).on("keyup", "#busca", function() {
 
         let termo = $(this).val().trim();
