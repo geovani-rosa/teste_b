@@ -62,7 +62,7 @@ class EntregaController {
 
         foreach ($dados as $e) {
             echo "
-                <tr>
+                <tr class='linha-entrega' data-id='{$e['id']}'>
                     <td>{$e['id']}</td>
                     <td>{$e['fantasia']}</td>
                     <td>{$e['remetente_nome']}</td>
@@ -97,7 +97,7 @@ class EntregaController {
             $fantasia = $this->getTransportadoraNome($e['fantasia']);
 
             echo "
-                <tr>
+                <tr class='linha-entrega' data-id='{$e['id']}'>
                     <td>{$e['id']}</td>
                     <td>{$e['fantasia']}</td>
                     <td>{$e['remetente_nome']}</td>
